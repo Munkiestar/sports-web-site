@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Navbar.scss";
 
-import { Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Material Icons
 import SportsBasketballIcon from "@material-ui/icons/SportsBasketball";
@@ -22,7 +22,7 @@ function Navbar() {
     <div className="navbar">
       <div className="navbar__container">
         <div className="navbar__left">
-          <Link to="/" className="navbar__logo">
+          <Link to="/" onClick={handleClick} className="navbar__logo">
             <h3> Sports</h3>
             <SportsBasketballIcon className="navbar__iconBasket" />
           </Link>
@@ -33,13 +33,19 @@ function Navbar() {
         <div className="navbar__right">
           <ul className={handleActiveLinks}>
             <li className="navbar__link">
-              <Link to="/">Početna</Link>
+              <Link to="/" onClick={handleClick}>
+                Početna
+              </Link>
             </li>
             <li className="navbar__link">
-              <Link to="/about">O nama</Link>
+              <Link to="/about" onClick={handleClick}>
+                O nama
+              </Link>
             </li>
             <li className="navbar__link">
-              <Link to="/games">Igre</Link>
+              <Link to="/games" onClick={handleClick}>
+                Igre
+              </Link>
             </li>
           </ul>
         </div>
