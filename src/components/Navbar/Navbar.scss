@@ -4,12 +4,13 @@
   height: 5rem;
   font-size: 1.2rem;
   position: sticky;
+  top: 0;
   margin: auto;
   z-index: 999;
 
   &__container {
     width: 100%;
-    max-width: 1180px;
+    max-width: 73.75rem;
     margin: auto;
     display: flex;
     align-items: center;
@@ -76,8 +77,8 @@
     }
   }
 
-  // responsive design
-  @media screen and (max-width: 960px) {
+  // responsive design  960px
+  @media screen and (max-width: 60em) {
     &__links {
       display: flex;
       flex-direction: column;
@@ -86,7 +87,7 @@
 
       position: absolute;
       top: 5rem;
-      left: -100%;
+      left: -110%;
       opacity: 1;
       transition: all 0.5s ease;
 
