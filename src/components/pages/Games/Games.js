@@ -5,6 +5,10 @@ const API = "https://mcasino.supersport.hr/api/games";
 
 function Games() {
   const [brandsTree, setBrandsTree] = useState({ brands: [] });
+  const [showBrandsName, setShowBrandsName] = useState(false);
+
+  // show and hide Brands
+  const handleShowBrands = () => setShowBrandsName(!showBrandsName);
 
   // fetch data
   function fetchGames() {
@@ -43,7 +47,7 @@ function Games() {
   }, []);
 
   return (
-    <div>
+    <div className="brands">
       {brandsTree.brands
         // first sort all games alphabetically
         .sort(function (a, b) {
@@ -56,14 +60,20 @@ function Games() {
           return 0;
         })
         .map((brand) => (
-          <div className="game">
-            <h1 key={brand.firstLetter} id="firstLetter">
+          <div>
+            <h1
+              key={brand.firstLetter}
+              id="firstLetter"
+              onClick={handleShowBrands}
+            >
               {brand.firstLetter.toUpperCase()}
             </h1>
-            <div>
-              {brand.games.map(({ id, name }) => (
-                <GameName keyId={id} gameName={name} />
-              ))}
+
+            <div className="game">
+              {brand.games.map(
+                ({ id, name }) =>
+                  showBrandsName && <GameName keyId={id} gameName={name} />
+              )}
             </div>
           </div>
         ))}

@@ -77,8 +77,8 @@
     }
   }
 
-  // responsive design  960px
-  @media screen and (max-width: 60em) {
+  // responsive design  768px
+  @media screen and (max-width: 48em) {
     &__links {
       display: flex;
       flex-direction: column;
