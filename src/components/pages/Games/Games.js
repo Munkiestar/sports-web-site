@@ -6,9 +6,13 @@ const API = "https://mcasino.supersport.hr/api/games";
 function Games() {
   const [brandsTree, setBrandsTree] = useState({ brands: [] });
   const [showBrandsName, setShowBrandsName] = useState(false);
+  const [showBrands, setShowBrands] = useState(false);
 
   // show and hide Brands
   const handleShowBrands = () => setShowBrandsName(!showBrandsName);
+
+  // show and hide first Letters
+  const handleShowLetters = () => setShowBrands(!showBrands);
 
   // fetch data
   function fetchGames() {
@@ -22,7 +26,6 @@ function Games() {
           const brandWithStartingLetter = brandsTree.brands.filter(
             (brand) => brand.firstLetter === firstLetter
           );
-
           // push the first letter of each brand only once
           if (brandWithStartingLetter.length > 0) {
             brandWithStartingLetter[0].games.push({
@@ -33,6 +36,7 @@ function Games() {
           }
           // push first letter and all the games of that letter
           brandsTree.brands.push({
+            brandName: brand.name,
             firstLetter,
             games: [{ name: brand.name, id: brand.id }],
           });
@@ -61,20 +65,28 @@ function Games() {
         })
         .map((brand) => (
           <div>
-            <h1
-              key={brand.firstLetter}
-              id="firstLetter"
-              onClick={handleShowBrands}
-            >
-              {brand.firstLetter.toUpperCase()}
+            <h1 onClick={handleShowLetters} className="brands__name">
+              {brand.brandName}
             </h1>
-
-            <div className="game">
-              {brand.games.map(
-                ({ id, name }) =>
-                  showBrandsName && <GameName keyId={id} gameName={name} />
-              )}
-            </div>
+            {/* show/hide firstLetter of the games */}
+            {showBrands && (
+              <div>
+                <h1
+                  key={brand.firstLetter}
+                  id="firstLetter"
+                  onClick={handleShowBrands}
+                >
+                  {brand.firstLetter.toUpperCase()}
+                </h1>
+                <div className="game">
+                  {brand.games.map(
+                    ({ id, name }) =>
+                      // show/hide games
+                      showBrandsName && <GameName keyId={id} gameName={name} />
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         ))}
     </div>

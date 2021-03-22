@@ -3,12 +3,26 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  &__name {
+    width: auto;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: #f00946;
+    }
+  }
 }
 
 #firstLetter {
   padding-left: 4rem;
   margin-bottom: 2rem;
   border-bottom: 2px solid #ddd;
+  color: #5a2f2f;
   cursor: pointer;
 
   &:hover {
