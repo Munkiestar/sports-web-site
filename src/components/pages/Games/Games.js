@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GameName from "./GameName/GameName";
+import { decomposeColor, withMobileDialog } from "@material-ui/core";
 
 const API = "https://mcasino.supersport.hr/api/games";
 
@@ -19,32 +20,36 @@ function Games() {
     fetch(API)
       .then((res) => res.json())
       .then((data) => {
-        data.brands.forEach((brand) => {
+        data.items.forEach((item) => {
           // get the first letter of brand
-          const firstLetter = brand.name[0];
+          const firstLetter = item.name[0];
           // filter first letter
           const brandWithStartingLetter = brandsTree.brands.filter(
-            (brand) => brand.firstLetter === firstLetter
+            (item) => item.firstLetter === firstLetter
           );
+
           // push the first letter of each brand only once
           if (brandWithStartingLetter.length > 0) {
             brandWithStartingLetter[0].games.push({
-              name: brand.name,
-              id: brand.id,
+              name: item.name,
+              id: item.id,
             });
             return;
           }
+
           // push first letter and all the games of that letter
           brandsTree.brands.push({
-            brandName: brand.name,
+            brandName: item.brand,
             firstLetter,
-            games: [{ name: brand.name, id: brand.id }],
+            games: [{ name: item.name, id: item.id }],
           });
         });
 
         setBrandsTree(brandsTree);
       });
   }
+
+  console.log(brandsTree);
 
   useEffect(() => {
     fetchGames();
@@ -92,5 +97,4 @@ function Games() {
     </div>
   );
 }
-
 export default Games;
